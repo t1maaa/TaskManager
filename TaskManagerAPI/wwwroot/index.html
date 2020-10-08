@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ru.vuejs.org/js/vue.js"></script>
+    <script src="https://unpkg.com/@progress/kendo-treeview-vue-wrapper/dist/cdn/kendo-treeview-vue-wrapper.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+        <!-- <ul>
+            <template v-for="task in todos">
+                <li>Name: {{task.name}}, Desc: {{task.description}}</li>
+                <ul>
+                    <template v-for="subtask in ${{task.subtasks}}"></template>
+                    <li>Name: {{subtask.name}}</li>
+                </ul>
+            </template>
+        </ul> -->
+        <tree-view-list
+        class="task"
+        :task="todos"
+        ></tree-view-list>
+    </div>
+</body>
+<script src="app.js"></script>
+</html>

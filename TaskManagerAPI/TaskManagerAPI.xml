@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskManagerAPI</name>
+    </assembly>
+    <members>
+        <member name="M:TaskManagerAPI.Controllers.TasksController.CreateTask(TaskManager.ViewModel.Tasks.CreateTaskRequest,TaskManager.DAL.Interfaces.ICreateTaskCommand,System.Guid)">
+            <summary>
+            Create a new task or subtask
+            </summary>
+            <remarks>
+            some remarks
+            </remarks> 
+            <param name="id"></param>
+            <returns> new task info </returns>
+            <response code="201">Created</response>
+            <response code="400">Bad request, check payload</response>
+        </member>
+    </members>
+</doc>
