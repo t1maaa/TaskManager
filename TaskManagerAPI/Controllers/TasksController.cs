@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.JSInterop;
 using TaskManager.DAL.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel;
 using TaskManager.ViewModel.Tasks;
 
-namespace TaskManagerAPI.Controllers //
+namespace TaskManagerAPI.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
@@ -27,12 +19,13 @@ namespace TaskManagerAPI.Controllers //
             _db = context;
         }
 
+        #region CreateTask
         /// <summary>
         /// Create a new task or subtask
         /// </summary>
         /// <remarks>
         /// some remarks
-        /// </remarks> 
+        /// </remarks>
         /// <param name="id"></param>
         /// <returns> new task info </returns>
         /// <response code="201">Created</response>
@@ -42,31 +35,23 @@ namespace TaskManagerAPI.Controllers //
         [ProducesResponseType(typeof(TaskResponse), 201)]
         [ProducesResponseType(typeof(object), 400)]
         [Consumes("application/json")]
-        public async Task<IActionResult> CreateTask([FromBody]CreateTaskRequest request, [FromServices]ICreateTaskCommand command, Guid id = default) 
+        public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request, [FromServices] ICreateTaskCommand command, Guid id = default)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-
-            //request.ParentId = id;
             TaskResponse response = await command.ExecuteAsync(request);
 
-            /*if (response == null)
-            {
-                return NotFound();
-            }*/
             return CreatedAtAction(nameof(CreateTask), response.Id, response);
-            // _db.Tasks.Add(task);
-            //  await _db.SaveChangesAsync();
-            //  return task;
         }
-
+        #endregion
+        
+        #region DeleteTask
         [HttpDelete("{id}")]
         [Consumes("application/json")]
-        public async Task<ActionResult> DeleteTask(Guid id, [FromBody]DeleteTaskRequest request,
-            [FromServices] IDeleteTaskCommand command) //TODO: Guid сделать не Nullable и не парить мозг? Реализацию CreateTask чекай тудушку. и JWT пили
+        public async Task<ActionResult> DeleteTask(Guid id, [FromBody] DeleteTaskRequest request, [FromServices] IDeleteTaskCommand command)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +69,13 @@ namespace TaskManagerAPI.Controllers //
             }
             var result = await command.ExecuteAsync(request);
 
-            if(result.TotalItemsCount > 0)
+            if (result.TotalItemsCount > 0)
             {
                 return Ok(result);
             }
             return NotFound(result);
-
-
         }
+        #endregion
 
         #region GetTasksList
         // GET: api/Tasks
@@ -126,77 +110,28 @@ namespace TaskManagerAPI.Controllers //
         }
         #endregion
 
-
-        // PUT: api/Tasks/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        #region UpdateTask
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTask(Guid id, TaskManager.Db.Models.Task task)
+        public async Task<IActionResult> UpdateTask(Guid id, [FromBody] UpdateTaskRequest request, [FromServices] IUpdateTaskCommand command)
         {
-            if (id != task.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _db.Entry(task).State = EntityState.Modified;
-
-            try
+            if (id != request.Id)
             {
-                await _db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TaskExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("URL ID and body's ID should be the same");
             }
 
-            return NoContent();
+            var result = await command.ExecuteAsync(request);
+
+            if (result != null)
+                return Ok(result);
+
+            return NotFound();
         }
+        #endregion
 
-        // POST: api/Tasks
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<TaskManager.Db.Models.Task>> PostTask(TaskManager.Db.Models.Task task)
-        //{
-        //    return Ok();
-
-        //    /*
-        //    _context.Tasks.Add(task);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetTask", new { id = task.Id }, task);*/
-
-
-        //}
-
-        /*
-
-        // DELETE: api/Tasks/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<TaskManager.Db.Models.Task>> DeleteTask(int id)
-        {
-            var task = await _db.Tasks.FindAsync(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            _db.Tasks.Remove(task);
-            await _db.SaveChangesAsync();
-
-            return task;
-        }
-        */
-        private bool TaskExists(Guid id)
-        {
-            return _db.Tasks.Any(e => e.Id == id);
-        }
     }
 }
