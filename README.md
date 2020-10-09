@@ -1,9 +1,17 @@
 # TaskManager
 
+## Features
+
 ## Technical Stack
 * API: ASP.NET Core 3.1 + .NET Core EF
 * DB: MsSQL
 * Frontend: React
+
+* API Documentation: Swagger
+
+## Architecture and Patterns
+* N-Layer
+* CQRS
 
 ## Technical requirement
 Необходимо разработать систему управления задачами. Система должна позволять редактировать иерархию задач, а также проводить некоторые вычисления по их полям данных.
