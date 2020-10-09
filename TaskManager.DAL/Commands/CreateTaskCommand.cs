@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TaskManager.DAL.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel.Tasks;
-
+using Status = TaskManager.Common.Task.Enums.Status;
 
 namespace TaskManager.DAL.Commands
 {
@@ -31,13 +31,13 @@ namespace TaskManager.DAL.Commands
                 Name = request.Name,
                 Description = request.Description,
                 Assignee = request.Assignee,
-                //Parent = null,
-                ParentId = parent?.Id ,
+                ParentId = parent?.Id,
                 CreatedAt = DateTime.Now,
                 CompletedAt = default,
                 Subtasks = null,
-                Status = TaskManager.Db.Models.Status.Created
+                Status = Status.Created
             };
+
             parent?.Subtasks.Add(task);
 
             await _dbContext.Tasks.AddAsync(task);
@@ -53,11 +53,9 @@ namespace TaskManager.DAL.Commands
                 CreatedAt = task.CreatedAt,
                 CompletedAt = task.CompletedAt,
                 SpentTime = task.SpentTime,
-                Status = (ViewModel.Tasks.Status) task.Status,
+                Status = task.Status,
                 Complexity = task.Complexity
             };
-
-
         }
     }
 }
