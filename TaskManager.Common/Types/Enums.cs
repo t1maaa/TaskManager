@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Common.Types
+﻿namespace TaskManager.Common
 {
     public class Enums
     {
