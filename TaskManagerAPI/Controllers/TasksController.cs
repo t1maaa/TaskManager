@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TaskManager.DAL.Interfaces;
+using TaskManager.Core.Interfaces;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel;
 using TaskManager.ViewModel.Tasks;
@@ -13,10 +14,10 @@ namespace TaskManagerAPI.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
-        public TasksController(ApplicationDbContext context)
+        private readonly ITaskService _taskService;
+        public TasksController(ITaskService taskService)
         {
-            _db = context;
+            _taskService = taskService;
         }
 
         #region CreateTask
@@ -81,10 +82,11 @@ namespace TaskManagerAPI.Controllers
         // GET: api/Tasks
         [HttpGet]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetTasksList([FromServices] ITaskListQuery query) 
+        public async Task<IActionResult> GetTasksList([FromServices] IGetListQuery query)
         {
-            ListResponse<TaskResponse> response = await query.RunAsync();
-            return Ok(value: response);
+            var res = await _taskService.Get();
+            //ListResponse<TaskResponse> response = await query.RunAsync();
+            return Ok(value: res);
         }
         #endregion
 
@@ -92,7 +94,7 @@ namespace TaskManagerAPI.Controllers
         // GET: api/Tasks/5
         [HttpGet("{id}")]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetTask(Guid id, [FromServices] ITaskListQuery query)
+        public async Task<IActionResult> GetTask(Guid id, [FromServices] IGetListQuery query)
         {
             if (!ModelState.IsValid)
             {

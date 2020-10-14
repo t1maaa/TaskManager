@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TaskManager.ViewModel.Tasks;
 
-namespace TaskManager.DAL.Interfaces
+namespace TaskManager.Core.Tasks.Interfaces
 {
     public interface ICreateTaskCommand
     {

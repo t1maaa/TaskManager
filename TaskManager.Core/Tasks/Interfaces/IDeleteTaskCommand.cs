@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TaskManager.ViewModel;
 using TaskManager.ViewModel.Tasks;
 
-namespace TaskManager.DAL.Interfaces
+namespace TaskManager.Core.Tasks.Interfaces
 {
     public interface IDeleteTaskCommand
     {

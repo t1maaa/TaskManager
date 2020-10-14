@@ -15,11 +15,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using TaskManager.DAL.Commands;
-using TaskManager.DAL.Interfaces;
-using TaskManager.DAL.Queries;
+using TaskManager.Core.Interfaces;
+using TaskManager.Core.Tasks;
+using TaskManager.Core.Tasks.Commands;
+using TaskManager.Core.Tasks.Queries;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
-using Swashbuckle.AspNetCore.Swagger;
+using TaskManagerAPI.Extensions;
 
 namespace TaskManagerAPI
 {
@@ -125,7 +127,9 @@ namespace TaskManagerAPI
             service.AddScoped<ICreateTaskCommand, CreateTaskCommand>();
             service.AddScoped<IDeleteTaskCommand, DeleteTaskCommand>();
             service.AddScoped<IUpdateTaskCommand, UpdateTaskCommand>();
-            service.AddScoped<ITaskListQuery, TaskListQuery>();
+            service.AddScoped<IGetListQuery, GetListQuery>();
+
+            service.AddScoped<ITaskService, TaskService>();
         }
     }
 }

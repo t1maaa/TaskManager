@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>TaskManager.DataAccess</AssemblyName>
+    <RootNamespace>TaskManager.DataAccess</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskManager.Db\TaskManager.Db.csproj" />
+    <ProjectReference Include="..\TaskManager.ViewModel\TaskManager.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>

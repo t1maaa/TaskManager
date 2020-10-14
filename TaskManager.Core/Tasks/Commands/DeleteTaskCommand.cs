@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.DAL.Interfaces;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
-using TaskManager.Db.Models;
 using TaskManager.ViewModel;
 using TaskManager.ViewModel.Tasks;
-using Task = TaskManager.Db.Models.Task;
+using Task = TaskManager.Db.Entities.Task;
 
-namespace TaskManager.DAL.Commands
+namespace TaskManager.Core.Tasks.Commands
 {
     public class DeleteTaskCommand : IDeleteTaskCommand
     {

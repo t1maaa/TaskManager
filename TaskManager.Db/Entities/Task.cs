@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Status = TaskManager.Common.Task.Enums.Status;
 
-namespace TaskManager.Db.Models
+namespace TaskManager.Db.Entities
 {
     public class Task
     {

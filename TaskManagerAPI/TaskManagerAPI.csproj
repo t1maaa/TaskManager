@@ -26,9 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TaskManager.DAL\TaskManager.DAL.csproj" />
-    <ProjectReference Include="..\TaskManager.Db\TaskManager.Db.csproj" />
-    <ProjectReference Include="..\TaskManager.ViewModel\TaskManager.ViewModel.csproj" />
+    <ProjectReference Include="..\TaskManager.Core\TaskManager.Core.csproj" />
   </ItemGroup>
 
 

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.DAL.Interfaces;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel;
 using TaskManager.ViewModel.Tasks;
 
-namespace TaskManager.DAL.Queries
+namespace TaskManager.Core.Tasks.Queries
 {
-    public class TaskListQuery : ITaskListQuery
+    public class GetListQuery : IGetListQuery
     {
         private readonly ApplicationDbContext _dbContext;
-        public TaskListQuery(ApplicationDbContext context)
+        public GetListQuery(ApplicationDbContext context)
         {
             _dbContext = context;
         }

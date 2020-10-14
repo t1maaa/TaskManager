@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace TaskManager.Db.Models
+namespace TaskManager.Db.Entities
 {
     public class User
     {

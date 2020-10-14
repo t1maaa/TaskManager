@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TaskManager.Db.Tests
 {
-    using TaskManager.Db.Models;
     [TestClass]
     class SeedTasksTests
     {

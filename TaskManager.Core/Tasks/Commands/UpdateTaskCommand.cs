@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.DAL.Interfaces;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel.Tasks;
 using Status = TaskManager.Common.Task.Enums.Status;
 
-namespace TaskManager.DAL.Commands
+namespace TaskManager.Core.Tasks.Commands
 {
     public class UpdateTaskCommand : IUpdateTaskCommand
     {

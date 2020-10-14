@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.DAL.Interfaces;
+using TaskManager.Core.Tasks.Interfaces;
 using TaskManager.Db;
 using TaskManager.ViewModel.Tasks;
 using Status = TaskManager.Common.Task.Enums.Status;
+using Task = TaskManager.Db.Entities.Task;
 
-namespace TaskManager.DAL.Commands
+namespace TaskManager.Core.Tasks.Commands
 {
     public class CreateTaskCommand : ICreateTaskCommand
     {
@@ -17,7 +18,7 @@ namespace TaskManager.DAL.Commands
 
         public async Task<TaskResponse> ExecuteAsync(CreateTaskRequest request)
         {
-            Db.Models.Task parent = null;
+            Task parent = null;
             if (request.ParentId != Guid.Empty && request.ParentId != null) //
             {
                 parent = _dbContext.Tasks
@@ -26,7 +27,7 @@ namespace TaskManager.DAL.Commands
                     .FirstOrDefault();
             }
 
-            var task = new Db.Models.Task
+            var task = new Task
             {
                 Name = request.Name,
                 Description = request.Description,

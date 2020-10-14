@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Db.Models;
+using TaskManager.Db.Entities;
 
 namespace TaskManager.Db
 {

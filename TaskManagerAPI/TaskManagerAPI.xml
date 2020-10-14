@@ -4,7 +4,7 @@
         <name>TaskManagerAPI</name>
     </assembly>
     <members>
-        <member name="M:TaskManagerAPI.Controllers.TasksController.CreateTask(TaskManager.ViewModel.Tasks.CreateTaskRequest,TaskManager.DAL.Interfaces.ICreateTaskCommand,System.Guid)">
+        <member name="M:TaskManagerAPI.Controllers.TasksController.CreateTask(TaskManager.ViewModel.Tasks.CreateTaskRequest,TaskManager.Core.Tasks.Interfaces.ICreateTaskCommand,System.Guid)">
             <summary>
             Create a new task or subtask
             </summary>

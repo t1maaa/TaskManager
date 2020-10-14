@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using TaskManager.Db.Entities;
+using Status = TaskManager.Common.Task.Enums.Status;
 
 namespace TaskManager.Db.Tests
 {
-    using TaskManager.Db.Models;
     [TestClass]
     public class TaskTests
     {
