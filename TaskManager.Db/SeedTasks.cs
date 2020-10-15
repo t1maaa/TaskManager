@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using TaskManager.Db.Models;
+using Status = TaskManager.Common.Task.Enums.Status;
 
 namespace TaskManager.Db
 {
