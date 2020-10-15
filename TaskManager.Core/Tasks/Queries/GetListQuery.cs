@@ -20,7 +20,7 @@ namespace TaskManager.Core.Tasks.Queries
 
         private async Task<List<TaskResponse>> LoadTasks(Guid parentId = default)
         {
-            var tasks = await _dbContext.Tasks
+            var tasks = await _dbContext.Tasks.AsNoTracking()
                 .Where(t => (parentId != Guid.Empty && parentId != null)
                     ? t.ParentId == parentId
                     : t.ParentId == Guid.Empty || t.ParentId == null)
