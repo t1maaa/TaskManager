@@ -81,9 +81,13 @@ namespace TaskManagerAPI.Controllers
         // GET: api/Tasks
         [HttpGet]
         [Consumes("application/json")]
-        public async Task<IActionResult> GetTasksList([FromServices] ITaskListQuery query) 
+        public async Task<IActionResult> GetTasksList([FromServices] ITaskListQuery query, [FromQuery] TaskParameters parameters) 
         {
-            ListResponse<TaskResponse> response = await query.RunAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ListResponse<TaskResponse> response = await query.RunAsync(parameters);
             return Ok(value: response);
         }
         #endregion
@@ -99,7 +103,7 @@ namespace TaskManagerAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            ListResponse<TaskResponse> response = await query.RunAsync(id);
+            ListResponse<TaskResponse> response = await query.RunAsync(null, id);
 
              if (response.Items.Count > 0)
                 return Ok(response);
